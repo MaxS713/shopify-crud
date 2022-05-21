@@ -59,8 +59,6 @@
   width: 50vw;
 }
 
-
-
 #confirm-content {
   display: flex;
   flex-direction: column;
@@ -98,31 +96,6 @@
   cursor: default;
 }
 
-#carousel button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  font-size: 2rem;
-  background: none;
-  border: none;
-}
-
-#carousel button:hover {
-  outline: none;
-  border: none;
-  font-size: 3rem;
-}
-
-#combat-list {
-  display: flex;
-  gap: 15px;
-}
-
-#combat-list .thead {
-  color: #80d0b2;
-  font-weight: 600;
-}
 
 .links {
   color: #8ba6a9;

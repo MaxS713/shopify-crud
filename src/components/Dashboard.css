@@ -59,7 +59,6 @@ span img {
 #robot-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
   overflow-x: hidden;
   overflow-y: scroll;
   height: 50vh;
@@ -155,9 +154,9 @@ th {
 }
 
 #help-button {
-  display:flex;
+  display: flex;
   align-items: center;
-  gap:5px;
+  gap: 5px;
   font-size: 1.2rem;
   font-weight: 600;
 }
@@ -165,4 +164,53 @@ th {
 #help-button span {
   font-size: 1.5rem;
   font-weight: 800;
+}
+
+input {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border: 2px solid #9aa59a;
+}
+
+button {
+  margin: 10px 0;
+  cursor: pointer;
+  font-size: 15px;
+  background: #80d0b2;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+button:hover {
+  outline: 1px solid black;
+}
+
+#rooms {
+  outline: 5px solid #8ba6a9;
+}
+
+#rooms ul {
+  list-style-type: none;
+  padding-left: 0;
+  padding: 0.5rem;
+}
+
+#rooms li {
+  padding: 0.5rem;
+}
+
+#rooms li:hover {
+  cursor: pointer;
+  color: lightblue;
+}
+
+.selected {
+  outline: 1px solid lightblue;
+}
+
+#create-robot-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

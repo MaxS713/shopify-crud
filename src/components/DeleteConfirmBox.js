@@ -9,10 +9,10 @@ export default function DeleteConfirmBox(props) {
       method: "POST",
       body: JSON.stringify({
         creatorName: props.creatorName,
-        robotName: props.allRobots[props.indexToDelete],
+        modelName: props.allRobots[props.indexToDelete],
       }),
     }).then(
-      (window.location.href = `/dashboard?username=${btoa(props.creatorName)}`)
+      (window.location.href = "/dashboard")
     );
   }
 
