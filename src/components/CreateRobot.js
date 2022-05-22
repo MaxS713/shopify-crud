@@ -26,8 +26,6 @@ export default function CreateNewRobotModal(props) {
     });
   }
 
-  console.log(inputToCreate);
-
   if (props.modalState === true) {
     return (
       <main id="overlay">

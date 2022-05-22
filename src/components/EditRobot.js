@@ -1,12 +1,30 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "./modal.css";
 
 export default function EditModal(props) {
   const [inputToEdit, setInputToEdit] = useState(
     {_id: props.selectedRobotID},
-    {modelName: props.selectedmodelName},
-    {quantity: parseInt(props.selectedRobotQuantity)}
+    {modelName: props.selectedModelName},
+    {quantity: props.selectedRobotQuantity},
+    {color: props.selectedRobotColor},
+    {type: props.selectedRobotType}
   );
+
+  useEffect(() => {
+    setInputToEdit(
+      {_id: props.selectedRobotID},
+      {modelName: props.selectedModelName},
+      {quantity: props.selectedRobotQuantity},
+      {color: props.selectedRobotColor},
+      {type: props.selectedRobotType}
+    );
+  }, [
+    props.selectedRobotID,
+    props.selectedModelName,
+    props.selectedRobotQuantity,
+    props.selectedRobotColor,
+    props.selectedRobotType,
+  ]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -24,8 +42,6 @@ export default function EditModal(props) {
     });
   }
 
-  console.log(inputToEdit);
-
   if (props.modalState === true) {
     return (
       <main id="overlay">
@@ -33,32 +49,64 @@ export default function EditModal(props) {
           <div id="modal-content">
             <h1>Edit A Robot</h1>
             <form>
-              <p>You will edit: {props.selectedmodelName}</p>
-              <p>Quantity: {props.selectedRobotQuantity}</p>
+              <div>
+                <label>
+                  Change name:&nbsp;
+                  <input
+                    type="text"
+                    name="modelName"
+                    onChange={handleChangesToEdit}
+                    autoComplete="off"
+                    placeholder={props.selectedModelName}
+                  />
+                </label>
+              </div>
+              <div>
+                <label>
+                  Change Quantity:&nbsp;
+                  <input
+                    type="number"
+                    name="quantity"
+                    min="1"
+                    onChange={handleChangesToEdit}
+                    autoComplete="off"
+                    placeholder={props.selectedRobotQuantity}
+                  />
+                </label>
+              </div>
               <label>
-                Change name:&nbsp;
-                <input
-                  type="text"
-                  name="modelName"
-                  onChange={handleChangesToEdit}
-                  autoComplete="off"
-                  placeholder={props.selectedmodelName}
-                />
+                Color:&nbsp;
+                <select name="color" onChange={handleChangesToEdit}>
+                  <option
+                    defaultValue={props.selectedRobotColor}
+                    selected
+                    disabled
+                  >
+                    {props.selectedRobotColor}
+                  </option>
+                  <option value="Blue Enamel">Blue Enamel</option>
+                  <option value="Shinny White">Shinny White</option>
+                  <option value="Silver">Silver</option>
+                  <option value="Mat Black">Mat Black</option>
+                </select>
               </label>
               <label>
-                Change Quantity:&nbsp;
-                <input
-                  type="number"
-                  name="quantity"
-                  min="1"
-                  onChange={handleChangesToEdit}
-                  autoComplete="off"
-                  placeholder={props.selectedRobotQuantity}
-                />
+                Type:&nbsp;
+                <select name="type" onChange={handleChangesToEdit}>
+                  <option
+                    defaultValue={props.selectedRobotType}
+                    selected
+                    disabled
+                  >
+                    {props.selectedRobotType}
+                  </option>
+                  <option value="American">American</option>
+                  <option value="Russian">Russian</option>
+                  <option value="Chinese">Chinese</option>
+                </select>
               </label>
               <div id="buttons">
                 <button
-                  disabled={!inputToEdit.modelName || !inputToEdit.quantity}
                   onClick={handleSubmit}
                 >
                   Edit

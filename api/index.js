@@ -39,10 +39,19 @@ app.post("/api/delete-robot", async (req, res) => {
 });
 
 app.post("/api/edit-robot", async (req, res) => {
-  console.log(req.body._id)
   let robotToUpdate = await Robot.findById(req.body._id);
-  robotToUpdate.modelName = req.body.modelName;
-  robotToUpdate.quantity = req.body.quantity;
+  if (req.body.modelName) {
+    robotToUpdate.modelName = req.body.modelName;
+  }
+  if (req.body.quantity) {
+    robotToUpdate.quantity = req.body.quantity;
+  }
+  if (req.body.color) {
+    robotToUpdate.color = req.body.color;
+  }
+  if (req.body.type) {
+    robotToUpdate.type = req.body.type;
+  }
   await robotToUpdate.save();
 });
 

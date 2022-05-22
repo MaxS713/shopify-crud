@@ -11,7 +11,9 @@ function Dashboard() {
   const [selectedRobotID, setSelectedRobotID] = useState("");
   const [selectedModelName, setSelectedModelName] = useState("");
   const [selectedRobotQuantity, setSelectedRobotQuantity] = useState("");
-  const [currentStorageRoom, setCurrentStorageRoom] = useState("All Robots");
+  const [selectedRobotColor, setSelectedRobotColor] = useState("");
+  const [selectedRobotType, setSelectedRobotType] = useState("");
+  const [currentStorageRoom, setCurrentStorageRoom] = useState("All");
 
   let allRobotsArray = [];
 
@@ -57,9 +59,6 @@ function Dashboard() {
     if (editModalState === true) {
       setEditModalState(false);
     } else {
-      setSelectedRobotID(event.target.id);
-      setSelectedModelName(event.target.name);
-      setSelectedRobotQuantity(event.target.value);
       setEditModalState(true);
     }
   }
@@ -108,17 +107,24 @@ function Dashboard() {
               </li>
             </ul>
           </div>
+          <div id="options">
+            <button onClick={handleClickCreateRobot}>
+              <div className="resources-in-button">Create A New Robot</div>
+            </button>
+            <button onClick={handleClickDeleteRobot}>
+              <div className="resources-in-button">Delete A Robot</div>
+            </button>
+          </div>
         </div>
         <div id="center">
           <div id="robot-list-header">
             <h2>Robots in Inventory:</h2>
           </div>
           <div id="robot-list">
-            {robotData.map((robot) => {
+            {robotData.map((robot, index) => {
               if (currentStorageRoom === "All") {
                 return (
-                  <>
-                    <div className="robot-data">
+                    <div key={index} className="robot-data">
                       <div className="robot-description">
                         <h1>{robot.modelName}</h1>
                         <p>
@@ -137,17 +143,21 @@ function Dashboard() {
                           <span>Date Of Creation: </span>
                           {robot.currentDate}
                         </p>
-                        <button
-                          id={robot._id}
-                          name={robot.modelName}
-                          value={robot.quantity}
-                          onClick={handleClickEdit}
-                        >
-                          Edit
-                        </button>
+                        <hr />
                       </div>
+                      <button
+                        onClick={() => {
+                          setSelectedRobotID(robot._id);
+                          setSelectedModelName(robot.modelName);
+                          setSelectedRobotQuantity(robot.quantity);
+                          setSelectedRobotColor(robot.color);
+                          setSelectedRobotType(robot.type);
+                          handleClickEdit();
+                        }}
+                      >
+                        Edit
+                      </button>
                     </div>
-                  </>
                 );
               } else if (robot.type === currentStorageRoom) {
                 return (
@@ -171,15 +181,20 @@ function Dashboard() {
                           <span>Date Of Creation: </span>
                           {robot.currentDate}
                         </p>
-                        <button
-                          id={robot._id}
-                          name={robot.modelName}
-                          value={robot.quantity}
-                          onClick={handleClickEdit}
-                        >
-                          Edit
-                        </button>
+                        <hr />
                       </div>
+                      <button
+                        onClick={() => {
+                          setSelectedRobotID(robot._id);
+                          setSelectedModelName(robot.modelName);
+                          setSelectedRobotQuantity(robot.quantity);
+                          setSelectedRobotColor(robot.color);
+                          setSelectedRobotType(robot.type);
+                          handleClickEdit();
+                        }}
+                      >
+                        Edit
+                      </button>
                     </div>
                   </>
                 );
@@ -189,16 +204,6 @@ function Dashboard() {
             })}
           </div>
         </div>
-        <aside>
-          <div id="options">
-            <button onClick={handleClickCreateRobot}>
-              <div className="resources-in-button">Create A New Robot</div>
-            </button>
-            <button onClick={handleClickDeleteRobot}>
-              <div className="resources-in-button">Delete A Robot</div>
-            </button>
-          </div>
-        </aside>
         <CreateNewRobotModal
           handleClick={handleClickCreateRobot}
           modalState={createRobotModalState}
@@ -213,6 +218,8 @@ function Dashboard() {
           modalState={editModalState}
           selectedModelName={selectedModelName}
           selectedRobotID={selectedRobotID}
+          selectedRobotColor={selectedRobotColor}
+          selectedRobotType={selectedRobotType}
           selectedRobotQuantity={selectedRobotQuantity}
         />
         <RobotsNotificationModal
